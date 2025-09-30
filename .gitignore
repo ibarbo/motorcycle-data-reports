@@ -12,5 +12,5 @@ __pycache__/
 .streamlit/
 
 # Archivos de Data (si tienes alguno que no deba subirse)
-*.csv
+# *.csv
 *.log
