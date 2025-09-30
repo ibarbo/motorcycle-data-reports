@@ -1,0 +1,16 @@
+# Entorno Virtual de Python
+venv/
+.venv/
+__pycache__/
+
+# Archivos de IDE (ej. VS Code, PyCharm)
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Archivos de Streamlit
+.streamlit/
+
+# Archivos de Data (si tienes alguno que no deba subirse)
+*.csv
+*.log
