@@ -9,7 +9,7 @@ __pycache__/
 *.sublime-workspace
 
 # Archivos de Streamlit
-.streamlit/
+#.streamlit/
 
 # Archivos de Data (si tienes alguno que no deba subirse)
 # *.csv

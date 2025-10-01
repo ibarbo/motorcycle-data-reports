@@ -1,0 +1,7 @@
+[theme]
+# Establece el tema base como oscuro
+base="dark"
+# Color primario de Ronnin (un violeta/púrpura fuerte)
+primaryColor="#8B00FF"
+# Color de fondo (opcional, si quieres un negro más profundo)
+backgroundColor="#0E1117"
