@@ -251,7 +251,7 @@ st.markdown(
     """
 )
 
-FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSehJj5XquKJJd5fagVHPYX_XZvR3rMUDA6NbI9qnzXBJQofww/viewform?usp=sf_link"
+FORM_URL = "https://forms.gle/Hoifu4bfpN8581A4A"
 st.markdown(
     f"""
     <div style="text-align: center; background-color: #34495E; padding: 15px; border-radius: 5px; margin-top: 30px;">
