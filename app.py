@@ -276,6 +276,10 @@ st.markdown(
     <div style="text-align: center; margin-top: 20px; margin-bottom: 10px;">
         <p style="font-size: 1em; margin: 0;">Una iniciativa de <strong>Ronnin DataLab</strong> | Ingeniería de Precisión para Motocicletas.</p>
         <p style="font-size: 0.9em; color: #888; margin: 0;">Transformando la telemetría en mantenimiento inteligente.</p>
+        <p style="font-size: 0.8em; margin-top: 10px;">
+            © 2025 Ronnin DataLab |
+            <a href="https://www.ronnin.co" target="_self" style="color: #8B00FF; text-decoration: none;">Regresar a ronnin.co</a>
+        </p>
     </div>
     """,
     unsafe_allow_html=True
