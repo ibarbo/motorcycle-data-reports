@@ -4,6 +4,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import numpy as np
+# Eliminamos la importación de PIL/Image ya que no usamos la imagen del logo
 
 # --- 1. CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -42,9 +43,20 @@ df, temp_ambiente_media, energia_total_acumulada, temp_final = load_data()
 energia_max = df['Energia_Disipada_kJ'].max()
 
 
+# ----------------------------------------------------
+# MODIFICACIÓN FINAL: HEADER CON LOGO DE TEXTO (PÚRPURA)
+# ----------------------------------------------------
+
+# Título de la marca en PÚRPURA para el máximo impacto visual
+st.markdown("<h1 style='font-size: 3em; color: #9300FF; margin-bottom: 0px;'>Ronnin DataLab</h1>", unsafe_allow_html=True)
+
+# Título del informe, alineado y compacto
+st.markdown("<h2 style='font-size: 1.5em; margin-top: -10px;'>Estrés Térmico y Desgaste en Frenos</h2>", unsafe_allow_html=True)
+
+st.divider() # Línea divisora
+
 # --- 3. INTERFAZ Y NARRATIVA (Artículo B1) ---
 
-st.markdown("# **Ronnin DataLab** | Estrés Térmico y Desgaste en Frenos")
 st.markdown("### **Análisis de Fricción:** Cómo la baja calidad de las pastillas deforma su disco 🏍️")
 
 st.write(
@@ -64,17 +76,17 @@ if not df.empty:
         st.metric(label="Temperatura Ambiente Media 🌡️", value=f"{temp_ambiente_media:.1f} °C")
     with col2:
         st.metric(label="Energía Máx. por Pico",
-                    value=f"{energia_max:.1f} kJ",
-                    delta="UMBRAL EBULLICIÓN: Alerta Vapor Lock",
-                    delta_color="inverse")
+                      value=f"{energia_max:.1f} kJ",
+                      delta="UMBRAL EBULLICIÓN: Alerta Vapor Lock",
+                      delta_color="inverse")
     with col3:
         st.metric(label="Energía Total Disipada (Acum.)",
-                    value=f"{energia_total_acumulada:.0f} kJ")
+                      value=f"{energia_total_acumulada:.0f} kJ")
     with col4:
         st.metric(label="Deceleración Máx. Registrada",
-                    value=f"{deceleracion_max:.1f} m/s²",
-                    delta="FATIGA ESTRUCTURAL",
-                    delta_color="inverse")
+                      value=f"{deceleracion_max:.1f} m/s²",
+                      delta="FATIGA ESTRUCTURAL",
+                      delta_color="inverse")
 
     st.markdown("---")
 
@@ -92,7 +104,7 @@ if not df.empty:
 
     fig_unificada.add_trace(
         go.Scatter(x=df['Tiempo_s'], y=df['Velocidad_kmh'], name='Velocidad (km/h)',
-                   line=dict(color='#1ABC9C', width=3)),
+                     line=dict(color='#1ABC9C', width=3)),
         row=1, col=1
     )
 
@@ -121,20 +133,20 @@ if not df.empty:
         if not df_segmento.empty:
             fig_unificada.add_trace(
                 go.Scatter(x=df_segmento['Tiempo_s'], y=df_segmento['Energia_Disipada_kJ'], mode='markers',
-                            name=tipo,
-                            marker=dict(size=df_segmento['Energia_Disipada_kJ']/5,
-                                        color=color_hex,
-                                        sizemode='area', sizeref=2.*max(df_frenado['Energia_Disipada_kJ'])/(20.**2),
-                                        sizemin=4, opacity=0.8),
-                            legendgroup=tipo,
-                            showlegend=True),
+                              name=tipo,
+                              marker=dict(size=df_segmento['Energia_Disipada_kJ']/5,
+                                             color=color_hex,
+                                             sizemode='area', sizeref=2.*max(df_frenado['Energia_Disipada_kJ'])/(20.**2),
+                                             sizemin=4, opacity=0.8),
+                              legendgroup=tipo,
+                              showlegend=True),
                 row=2, col=1
             )
 
     fig_unificada.update_layout(height=650,
-                                 title_text="Correlación Causa-Estrés-Efecto: Donde Frenaste vs. Cuanto Calor Generaste",
-                                 legend=dict(tracegroupgap=0)
-                                 )
+                              title_text="Correlación Causa-Estrés-Efecto: Donde Frenaste vs. Cuanto Calor Generaste",
+                              legend=dict(tracegroupgap=0)
+                              )
     fig_unificada.update_yaxes(title_text="Velocidad (km/h)", row=1, col=1)
     fig_unificada.update_yaxes(title_text="Energía Disipada (kJ)", row=2, col=1)
     fig_unificada.update_xaxes(title_text="Tiempo (segundos)", row=2, col=1)
@@ -150,8 +162,8 @@ if not df.empty:
     Nuestro análisis se basa en la ley de **Conservación de la Energía**, donde cada frenada transforma energía cinética en calor. Esta acumulación de calor es la causa de la **Fatiga de Frenos** o *Fading*.
 
     El *Fading* es la pérdida de eficacia del sistema de frenos por sobrecalentamiento, lo que puede causar:
-    1.  **Vapor Lock:** Ebullición del líquido de frenos.
-    2.  **Alabeo de Disco:** Deformación por picos de temperatura.
+    1. 	**Vapor Lock:** Ebullición del líquido de frenos.
+    2. 	**Alabeo de Disco:** Deformación por picos de temperatura.
 
     La **Deceleración** (Estrés Mecánico), representada por el **área sombreada en la gráfica superior**, se calcula como la variación de velocidad en el tiempo. Una sombra más grande y oscura significa **mayor esfuerzo aplicado** al sistema.
     """
@@ -165,9 +177,6 @@ if not df.empty:
         Su data exige una corrección: **la ingeniería supera al manual**.
         """
     )
-
-    # ✅ CORRECCIÓN 5: Se elimina la línea que confunde al usuario con la promesa de "descargar el estudio"
-    # st.markdown("Para acceder al análisis completo de riesgo de *vapor lock* y descargar el estudio de **3.000 km** vs. **6.000 km**, **vote por su próximo artículo de interés en el formulario inferior.**")
 
     st.markdown("---")
 
@@ -245,9 +254,9 @@ st.markdown(
 # Opciones de votación según el formulario de Google (image_fd5e4d.png)
 st.markdown(
     """
-    1.  **Falla Silenciosa:** Cómo el Calor de sus Frenadas Evapora el DOT 4 (Continuación Frenos) 🏍️
-    2.  **Doble Vida:** Análisis de Aceite en Moto de Trabajo vs. Moto de Stunt (El Factor Aditivo Oculto) 💥
-    3.  **El Corazón Oculto de la 2T:** Por qué la 'Panza' del Exhosto da Potencia (Análisis de Ondas) 🧪
+    1. 	**Falla Silenciosa:** Cómo el Calor de sus Frenadas Evapora el DOT 4 (Continuación Frenos) 🏍️
+    2. 	**Doble Vida:** Análisis de Aceite en Moto de Trabajo vs. Moto de Stunt (El Factor Aditivo Oculto) 💥
+    3. 	**El Corazón Oculto de la 2T:** Por qué la 'Panza' del Exhosto da Potencia (Análisis de Ondas) 🧪
     """
 )
 
@@ -255,12 +264,12 @@ FORM_URL = "https://forms.gle/Hoifu4bfpN8581A4A"
 st.markdown(
     f"""
     <div style="text-align: center; background-color: #34495E; padding: 15px; border-radius: 5px; margin-top: 30px;">
-        <p style="color: white; font-weight: bold; margin: 0; font-size: 1.1em;">
-            Si quieres votar por el próximo artículo, haz clic en el enlace:
-        </p>
-        <a href="{FORM_URL}" target="_blank" style="color: white; text-decoration: none; font-size: 1.3em;">
-            <span style="border-bottom: 2px solid white; padding-bottom: 2px;">VOTAR Y ACCEDER A LOS INFORMES EXCLUSIVOS</span>
-        </a>
+    	<p style="color: white; font-weight: bold; margin: 0; font-size: 1.1em;">
+    	 	Si quieres votar por el próximo artículo, haz clic en el enlace:
+    	</p>
+    	<a href="{FORM_URL}" target="_blank" style="color: white; text-decoration: none; font-size: 1.3em;">
+    	 	<span style="border-bottom: 2px solid white; padding-bottom: 2px;">VOTAR Y ACCEDER A LOS INFORMES EXCLUSIVOS</span>
+    	</a>
     </div>
     """,
     unsafe_allow_html=True
@@ -274,12 +283,12 @@ st.markdown("---")
 st.markdown(
     """
     <div style="text-align: center; margin-top: 20px; margin-bottom: 10px;">
-        <p style="font-size: 1em; margin: 0;">Una iniciativa de <strong>Ronnin DataLab</strong> | Ingeniería de Precisión para Motocicletas.</p>
-        <p style="font-size: 0.9em; color: #888; margin: 0;">Transformando la telemetría en mantenimiento inteligente.</p>
-        <p style="font-size: 0.8em; margin-top: 10px;">
-            © 2025 Ronnin DataLab |
-            <a href="https://www.ronnin.co" target="_self" style="color: #8B00FF; text-decoration: none;">Regresar a ronnin.co</a>
-        </p>
+    	<p style="font-size: 1em; margin: 0;">Una iniciativa de <strong>Ronnin DataLab</strong> | Ingeniería de Precisión para Motocicletas.</p>
+    	<p style="font-size: 0.9em; color: #888; margin: 0;">Transformando la telemetría en mantenimiento inteligente.</p>
+    	<p style="font-size: 0.8em; margin-top: 10px;">
+    	 	© 2025 Ronnin DataLab |
+    	 	<a href="https://www.ronnin.co" target="_self" style="color: #9300FF; text-decoration: none;">Regresar a ronnin.co</a>
+    	</p>
     </div>
     """,
     unsafe_allow_html=True
