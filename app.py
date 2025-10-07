@@ -260,16 +260,13 @@ st.markdown(
     """
 )
 
-FORM_URL = "https://forms.gle/Hoifu4bfpN8581A4A"
+FORM_URL = "https://forms.gle/wwTTnXUhVGFjoF7K7"
 st.markdown(
     f"""
     <div style="text-align: center; background-color: #34495E; padding: 15px; border-radius: 5px; margin-top: 30px;">
     	<p style="color: white; font-weight: bold; margin: 0; font-size: 1.1em;">
-    	 	Si quieres votar por el próximo artículo, haz clic en el enlace:
+    	 	Gracias por ser un Data Rider. Tu voto ya fue registrado. Vuelve pronto para ver el resultado y el próximo caso de estudio.
     	</p>
-    	<a href="{FORM_URL}" target="_blank" style="color: white; text-decoration: none; font-size: 1.3em;">
-    	 	<span style="border-bottom: 2px solid white; padding-bottom: 2px;">VOTAR Y ACCEDER A LOS INFORMES EXCLUSIVOS</span>
-    	</a>
     </div>
     """,
     unsafe_allow_html=True
